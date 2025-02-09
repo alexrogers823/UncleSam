@@ -8,13 +8,13 @@ import { SavingsComponent } from './savings/savings.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
-    BrowserModule,
     DebtsComponent,
     SavingsComponent,
-    ItemsComponent
+    ItemsComponent,
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
