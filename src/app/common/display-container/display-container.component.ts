@@ -12,4 +12,5 @@ import { DisplayCardComponent } from "../display-card";
 export class DisplayContainerComponent {
   @Input() header!: string;
   @Input() count!: number;
+  @Input() cardData!: unknown;
 }

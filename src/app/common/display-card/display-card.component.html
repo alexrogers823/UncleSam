@@ -2,8 +2,8 @@
   <mat-card-header>
     <mat-card-title>{{ title }}</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <p>{{ amount | currency }}</p>
+  <mat-card-content *ngFor="let card of cardData">
+    <p>{{ card.amount | currency }}</p>
     <p>Due {{ dueDate | dueDate }}</p>
     <p>Last Updated: {{ lastUpdated | date: 'M/d/yy' }}</p>
   </mat-card-content>

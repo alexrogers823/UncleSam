@@ -1,4 +1,18 @@
-<app-display-container
-  [header]="header"
-  [count]="debtsCount">
-</app-display-container>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ header }}</mat-card-title>
+    <mat-card-subtitle>Total {{ header }}: {{ debtsData.length }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card class="display-card" appearance="outlined" *ngFor="let debt of debtsData">
+      <mat-card-header>
+        <mat-card-title>{{ debt.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ debt.amount | currency }}</p>
+        <p *ngIf="debt.dueDate">Due {{ debt.dueDate | dueDate }}</p>
+        <p>Last Updated: {{ debt.lastUpdated | date: 'M/d/yy' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
