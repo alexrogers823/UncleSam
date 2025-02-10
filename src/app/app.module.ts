@@ -8,7 +8,7 @@ import { SavingsComponent } from './savings/savings.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     DebtsComponent,

@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     <p>{{ amount | currency }}</p>
-    <p>Due {{ dueDate }}</p>
+    <p>Due {{ dueDate | dueDate }}</p>
     <p>Last Updated: {{ lastUpdated | date: 'M/d/yy' }}</p>
   </mat-card-content>
 </mat-card>

@@ -1,5 +1,8 @@
-import { DisplayCardComponent } from "./display-card/display-card.component";
+import { DisplayCardComponent } from "./display-card";
+import { DisplayContainerComponent } from "./display-container";
 
 export {
-  DisplayCardComponent
+  DisplayCardComponent,
+  DisplayContainerComponent
 };
+
