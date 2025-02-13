@@ -1,0 +1,41 @@
+<form>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput value="Berlin">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Current Amount</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Goal Amount</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Goal Date</mat-label>
+    <input matInput [min]="currentDate" [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Recurring</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-radio-group>
+        <mat-radio-button>Weekly</mat-radio-button>
+        <mat-radio-button>Monthly</mat-radio-button>
+        <mat-radio-button>Yearly</mat-radio-button>
+        <mat-radio-button>One-Time</mat-radio-button>
+      </mat-radio-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <button mat-button>Yes</button>
+  <button mat-button>No</button>
+</form>
