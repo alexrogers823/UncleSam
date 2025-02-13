@@ -1,1 +1,22 @@
-<p>savings works!</p>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ header }}</mat-card-title>
+    <mat-card-subtitle>Total {{ header }}: {{ savingsData.length }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card class="display-card" appearance="outlined" *ngFor="let saving of savingsData">
+      <mat-card-header>
+        <mat-card-title>{{ saving.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <span>{{ saving.currentAmount | currency }}</span>
+          <span *ngIf="saving.goalAmount">/ {{ saving.goalAmount | currency }}</span>
+        </div>
+        <p *ngIf="saving.goalDate">Goal {{ saving.goalDate | goalDate }}</p>
+        <p>(Progress Bar)</p>
+        <p>Last Updated: {{ saving.lastUpdated | date: 'M/d/yy' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
