@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { DebtsComponent } from './debts/debts.component';
 import { ItemsComponent } from './items/items.component';
 import { SavingsComponent } from './savings/savings.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { SavingsComponent } from './savings/savings.component';
     ItemsComponent,
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,13 +1,14 @@
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { EditCardComponent } from '../common/edit-card';
 import { DueDatePipe } from '../pipes';
 
 
 @Component({
   selector: 'app-debts',
   standalone: true,
-  imports: [MatCardModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
+  imports: [EditCardComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
   templateUrl: './debts.component.html',
   styleUrl: './debts.component.scss'
 })
