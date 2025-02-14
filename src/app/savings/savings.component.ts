@@ -1,9 +1,10 @@
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Saving } from '../models';
 import { GoalDatePipe } from '../pipes/goal-date/goal-date.pipe';
 import { EditSavingsComponent } from './edit-savings/edit-savings.component';
+import { SavingService } from './saving.service';
 
 @Component({
   selector: 'app-savings',
@@ -12,17 +13,18 @@ import { EditSavingsComponent } from './edit-savings/edit-savings.component';
   templateUrl: './savings.component.html',
   styleUrl: './savings.component.scss'
 })
-export class SavingsComponent {
+export class SavingsComponent implements OnInit {
   public header: string = 'Savings';
-  public savingsData: Saving[] = [
-    {
-      id: 1,
-      title: 'Berlin',
-      priority: 1,
-      currentAmount: 3250,
-      goalAmount: 5000,
-      goalDate: '2025-05-15',
-      lastUpdated: '2025-01-04'
-    }
-  ]
+  public savings: Saving[] = [];
+
+  public constructor(private savingService: SavingService) {}
+
+  public ngOnInit(): void {
+    this.getService();
+  }
+
+  public getService(): void {
+    this.savingService.getSavings()
+      .subscribe(savings => this.savings = savings);
+  }
 }

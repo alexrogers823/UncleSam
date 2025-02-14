@@ -1,9 +1,10 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Item } from '../models';
 import { CreatedDatePipe } from '../pipes/created-date/created-date.pipe';
 import { EditItemsComponent } from './edit-items/edit-items.component';
+import { ItemService } from './item.service';
 
 @Component({
   selector: 'app-items',
@@ -12,16 +13,18 @@ import { EditItemsComponent } from './edit-items/edit-items.component';
   templateUrl: './items.component.html',
   styleUrl: './items.component.scss'
 })
-export class ItemsComponent {
+export class ItemsComponent implements OnInit {
   public header: string = 'Items';
-  public itemsData: Item[] = [
-    {
-      id: 1,
-      title: 'Bowling Ball',
-      created: '2025-02-03',
-      amount: 199.99,
-      url: 'https://www.bowlersmart.com/shop/bowling-deals/bowling-ball-deals/?/&gad_source=1&gclid=CjwKCAiAzba9BhBhEiwA7glbao93TaQNfkwul46LPj5Qj7B0ZPyyB8BLbekraDnEzrVaBvJYhpgqGBoCWv4QAvD_BwE',
-      completed: false
-    }
-  ]
+  public items: Item[] = [];
+
+  public constructor(private itemService: ItemService) {}
+
+  public ngOnInit(): void {
+    this.getItems();
+  }
+
+  public getItems(): void {
+    this.itemService.getItems()
+      .subscribe(items => this.items = items);
+  }
 }
