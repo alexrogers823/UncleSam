@@ -1,6 +1,7 @@
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { Saving } from '../models';
 import { GoalDatePipe } from '../pipes/goal-date/goal-date.pipe';
 import { EditSavingsComponent } from './edit-savings/edit-savings.component';
 
@@ -13,7 +14,7 @@ import { EditSavingsComponent } from './edit-savings/edit-savings.component';
 })
 export class SavingsComponent {
   public header: string = 'Savings';
-  public savingsData = [
+  public savingsData: Saving[] = [
     {
       id: 1,
       title: 'Berlin',

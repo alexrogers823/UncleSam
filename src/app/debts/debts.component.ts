@@ -1,6 +1,7 @@
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { Debt } from '../models';
 import { DueDatePipe } from '../pipes';
 import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 
@@ -14,7 +15,7 @@ import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 })
 export class DebtsComponent {
   public header: string = 'Debts';
-  public debtsData = [
+  public debtsData: Debt[] = [
     {
       id: 1,
       title: 'Discover',
