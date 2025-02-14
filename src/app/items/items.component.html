@@ -1,1 +1,24 @@
-<p>items doesnot works!</p>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ header }}</mat-card-title>
+    <mat-card-subtitle>total {{ header }}: {{ itemsData.length }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card class="display-card" appearance="outlined" *ngFor="let item of itemsData">
+      <mat-card-header>
+        <mat-card-title *ngIf="item.url; else noUrl">
+          <a [href]="item.url" target="_blank">
+            <mat-card-title>{{ item.title }}</mat-card-title>
+          </a>
+        </mat-card-title>
+        <ng-template #noUrl>
+          <mat-card-title>{{ item.title }}</mat-card-title>
+        </ng-template>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ item.amount | currency }}</p>
+        <p>Created {{ item.created | createdDate }}</p>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
