@@ -2,11 +2,12 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CreatedDatePipe } from '../pipes/created-date/created-date.pipe';
+import { EditItemsComponent } from './edit-items/edit-items.component';
 
 @Component({
   selector: 'app-items',
   standalone: true,
-  imports: [MatCardModule, CommonModule, CurrencyPipe, CreatedDatePipe],
+  imports: [EditItemsComponent, MatCardModule, CommonModule, CurrencyPipe, CreatedDatePipe],
   templateUrl: './items.component.html',
   styleUrl: './items.component.scss'
 })
