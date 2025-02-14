@@ -6,3 +6,10 @@ export interface Item {
   url?: string;
   completed: boolean;
 }
+
+export interface ItemRequest {
+  title: string;
+  amount: number;
+  url?: string;
+  completed: boolean;
+}

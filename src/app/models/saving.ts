@@ -4,6 +4,14 @@ export interface Saving {
   priority: number;
   currentAmount: number;
   goalAmount?: number;
-  goalDate: string;
+  goalDate?: string;
   lastUpdated: string;
+}
+
+export interface SavingRequest {
+  title: string;
+  priority?: number;
+  currentAmount: number;
+  goalAmount?: number;
+  goalDate?: string;
 }
