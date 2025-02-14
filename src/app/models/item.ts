@@ -1,4 +1,4 @@
-export default interface Item {
+export interface Item {
   id: number;
   title: string;
   amount: number;

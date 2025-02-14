@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppComponent } from './app.component';
 import { DebtsComponent } from './debts/debts.component';
 import { ItemsComponent } from './items/items.component';
 import { SavingsComponent } from './savings/savings.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     DebtsComponent,
     SavingsComponent,
     ItemsComponent,
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [
     provideAnimationsAsync()

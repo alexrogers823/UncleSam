@@ -1,4 +1,4 @@
-export default interface Saving {
+export interface Saving {
   id: number;
   title: string;
   priority: number;
