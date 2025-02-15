@@ -1,4 +1,4 @@
-<form [formGroup]="debtForm" (submit)="submit()">
+<form [formGroup]="debtForm">
   <mat-form-field>
     <mat-label>Title</mat-label>
     <input matInput value="Discover" formControlName="title" required>
@@ -37,6 +37,6 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <button mat-button type="submit">Yes</button>
-  <button mat-button>No</button>
+  <button mat-button (click)="submit()">Yes</button>
+  <button mat-button (click)="close()">No</button>
 </form>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -20,6 +20,7 @@ import { DebtService } from '../debt.service';
 })
 export class EditDebtsComponent implements OnInit {
   @Input() debts!: Debt[];
+  @Output() closeForm = new EventEmitter<boolean>();
   public debtForm!: FormGroup;
   
   public constructor(
@@ -35,11 +36,17 @@ export class EditDebtsComponent implements OnInit {
     })
   }
 
+  public close() {
+    this.closeForm.emit(false);
+  }
+
   public submit() {
     console.log(this.debtForm.value);
+    // TODO: Trigger an on change strategy 
     this.debtService.addDebt(this.debtForm.value)
       .subscribe(debt => {
         this.debts.push(debt);
       })
+    this.close();
   }
 }

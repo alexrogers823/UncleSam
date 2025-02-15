@@ -17,6 +17,7 @@ import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 export class DebtsComponent implements OnInit {
   public header: string = 'Debts';
   public debts: Debt[] = [];
+  public addDebtWindowIsOpen: boolean = false;
 
   public constructor(private debtService: DebtService) {}
 
@@ -27,5 +28,9 @@ export class DebtsComponent implements OnInit {
   public getDebts(): void {
     this.debtService.getDebts()
       .subscribe(debts => this.debts = debts);
+  }
+
+  public handleAddDebtWindow(event: boolean): void {
+    this.addDebtWindowIsOpen = event;
   }
 }
