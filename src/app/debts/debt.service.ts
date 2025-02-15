@@ -1,14 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { Debt } from '../models';
+import { Debt, DebtRequest } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DebtService {
   private debtsUrl: string = 'http://localhost:8000/debts/';
-  private apiHeaders: Headers = new Headers({ 'Content-Type': 'application/json' });
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  }
   public debtsMockData: Debt[] = [
     {
       id: 1,
@@ -43,6 +45,61 @@ export class DebtService {
         }),
         catchError(this.handleError<Debt[]>([]))
       )
+  }
+
+  public getDebt(id: number): Observable<Debt> {
+    return this.http.get<Debt>(`${this.debtsUrl}/${id}/`)
+      .pipe(
+        map((res: any): Debt => ({
+          id: res.id,
+          title: res.title,
+          amount: res.amount,
+          lastUpdated: res.updated,
+          dueDate: res.due_date
+        })),
+        catchError(this.handleError<Debt>())
+      )
+  }
+
+  public updateDebt(debt: Debt): Observable<any> {
+    return this.http.put(this.debtsUrl, debt, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<any>())
+      )
+  }
+
+  public addDebt(debtRequest: DebtRequest): Observable<Debt> {
+    const mappedRequest = this.mapFieldNames(debtRequest, 'request');
+
+    return this.http.post<Debt>(this.debtsUrl, mappedRequest, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Debt>())
+      )
+  }
+
+  public deleteDebt(id: number): Observable<Debt> {
+    return this.http.delete<Debt>(this.debtsUrl, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Debt>())
+      )
+  }
+
+  private mapFieldNames(obj: any, direction: string = 'response'): any {
+    if (direction === 'request') {
+      return {
+        title: obj.title,
+        amount: obj.amount,
+        due_date: obj.dueDate.toISOString().substring(0, 10)
+      }
+    } 
+
+    return {
+      id: obj.id,
+      title: obj.title,
+      amount: obj.amount,
+      lastUpdated: obj.updated,
+      dueDate: obj.due_date
+    }
   }
 
   /**
