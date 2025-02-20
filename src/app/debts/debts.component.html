@@ -19,4 +19,7 @@
     <button mat-button [disabled]="addDebtWindowIsOpen" (click)="handleAddDebtWindow(true)">Add</button>
   </mat-card-actions>
 </mat-card>
-<app-edit-debts *ngIf="addDebtWindowIsOpen" [debts]="debts" (closeForm)="handleAddDebtWindow($event)"></app-edit-debts>
+
+<app-add-card *ngIf="addDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleAddDebtWindow($event)" (submitForm)="handleSubmitDebt($event)">
+  <app-edit-debts [debtForm]="debtForm" [debts]="debts" (updateForm)="handleUpdateForm($event)"></app-edit-debts>
+</app-add-card>

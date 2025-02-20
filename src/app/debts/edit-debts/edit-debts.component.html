@@ -1,15 +1,15 @@
-<form [formGroup]="debtForm">
+<div [formGroup]="debtForm">
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input matInput value="Discover" formControlName="title" required>
+    <input matInput value="Discover" formControlName="title" (blur)="update('title')" required>
     <mat-error *ngIf="debtForm.controls.title.touched">
       <span>Need to provide a title</span>
     </mat-error>
   </mat-form-field>
-
+  
   <mat-form-field>
     <mat-label>Amount</mat-label>
-    <input matInput formControlName="amount" required>
+    <input matInput type="number" formControlName="amount" (blur)="update('amount')" required>
     <mat-error *ngIf="debtForm.controls.amount.touched">
       <span>Need to specify an amount</span>
     </mat-error>
@@ -17,7 +17,7 @@
 
   <mat-form-field>
     <mat-label>Due Date</mat-label>
-    <input matInput formControlName="dueDate" [matDatepicker]="picker">
+    <input matInput formControlName="dueDate" [matDatepicker]="picker" (dateChange)="update('dueDate')">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
@@ -36,7 +36,4 @@
       </mat-radio-group>
     </mat-expansion-panel>
   </mat-accordion>
-
-  <button mat-button (click)="submit()">Yes</button>
-  <button mat-button (click)="close()">No</button>
-</form>
+</div>
