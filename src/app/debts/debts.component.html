@@ -1,25 +1,16 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>{{ header }}</mat-card-title>
-    <mat-card-subtitle>Total {{ header }}: {{ debts.length }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-card class="display-card" appearance="outlined" *ngFor="let debt of debts">
-      <mat-card-header>
-        <mat-card-title>{{ debt.title }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ debt.amount | currency }}</p>
-        <p *ngIf="debt.dueDate">Due {{ debt.dueDate | dueDate }}</p>
-        <p>Last Updated: {{ debt.lastUpdated | date: 'M/d/yy' }}</p>
-      </mat-card-content>
-    </mat-card>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button [disabled]="addDebtWindowIsOpen" (click)="handleAddDebtWindow(true)">Add</button>
-  </mat-card-actions>
-</mat-card>
+<app-display-container [header]="header" [displayData]="debts" [isAddingData]="addDebtWindowIsOpen" (handleAdd)="handleAddDebtWindow($event)">
+  <mat-card class="display-card" appearance="outlined" *ngFor="let debt of debts">
+    <mat-card-header>
+      <mat-card-title>{{ debt.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ debt.amount | currency }}</p>
+      <p *ngIf="debt.dueDate">Due {{ debt.dueDate | dueDate }}</p>
+      <p>Last Updated: {{ debt.lastUpdated | date: 'M/d/yy' }}</p>
+    </mat-card-content>
+  </mat-card>
+</app-display-container>
 
 <app-add-card *ngIf="addDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleAddDebtWindow($event)" (submitForm)="handleSubmitDebt($event)">
   <app-edit-debts [debtForm]="debtForm" [debts]="debts" (updateForm)="handleUpdateForm($event)"></app-edit-debts>
-</app-add-card>
+</app-add-card> 

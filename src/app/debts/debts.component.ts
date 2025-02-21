@@ -2,7 +2,7 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { AddCardComponent } from '../common';
+import { AddCardComponent, DisplayContainerComponent } from '../common';
 import { Debt } from '../models';
 import { DueDatePipe } from '../pipes';
 import { DebtService } from './debt.service';
@@ -12,7 +12,7 @@ import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 @Component({
   selector: 'app-debts',
   standalone: true,
-  imports: [AddCardComponent, EditDebtsComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
+  imports: [DisplayContainerComponent, AddCardComponent, EditDebtsComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
   templateUrl: './debts.component.html',
   styleUrl: './debts.component.scss'
 })

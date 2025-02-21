@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { DisplayCardComponent } from "../display-card";
 import { EditCardComponent } from "../edit-card";
@@ -12,6 +12,11 @@ import { EditCardComponent } from "../edit-card";
 })
 export class DisplayContainerComponent {
   @Input() header!: string;
-  @Input() count!: number;
-  @Input() cardData!: unknown;
+  @Input() displayData!: any;
+  @Input() isAddingData!: boolean;
+  @Output() handleAdd = new EventEmitter<boolean>();
+
+  add(): void {
+    this.handleAdd.emit(true);
+  }
 }
