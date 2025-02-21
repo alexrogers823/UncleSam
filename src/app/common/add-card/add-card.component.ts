@@ -16,19 +16,19 @@ export class AddCardComponent implements OnInit {
   @Output() closeForm = new EventEmitter<boolean>();
   @Output() submitForm = new EventEmitter<any>();
 
-  public constructor(
+  constructor(
     private formBuilder: FormBuilder
   ) { }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.formBuilder.group(this.formData)
   }
 
-  public close(): void {
+  close(): void {
     this.closeForm.emit(false);
   }
 
-  public submit(): void {
+  submit(): void {
     this.submitForm.emit(this.formData.value);
     this.close();
   }

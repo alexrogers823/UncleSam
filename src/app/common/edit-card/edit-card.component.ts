@@ -1,11 +1,7 @@
-import { Component } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { provideNativeDateAdapter } from "@angular/material/core";
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-edit-card',
@@ -13,6 +9,27 @@ import { MatRadioModule } from '@angular/material/radio';
   styleUrl: './edit-card.component.scss',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDatepickerModule, MatExpansionModule]
+  imports: [FormsModule, ReactiveFormsModule, CommonModule]
 })
-export class EditCardComponent {}
+export class EditCardComponent {
+  @Input() formData!: FormGroup;
+  @Output() closeForm = new EventEmitter<boolean>();
+  @Output() submitForm = new EventEmitter<any>();
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+    this.formBuilder.group(this.formData)
+  }
+
+  close(): void {
+    this.closeForm.emit(false);
+  }
+
+  submit(): void {
+    this.submitForm.emit(this.formData.value);
+    this.close();
+  }
+}

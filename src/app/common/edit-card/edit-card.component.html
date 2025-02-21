@@ -1,0 +1,6 @@
+<form [formGroup]="formData">
+  <ng-content />
+
+  <button mat-button type="submit" (click)="submit()">Yes</button>
+  <button mat-button type="button" (click)="close()">No</button>
+</form>

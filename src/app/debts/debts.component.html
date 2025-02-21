@@ -1,4 +1,4 @@
-<app-display-container [header]="header" [displayData]="debts" [isAddingData]="addDebtWindowIsOpen" (handleAdd)="handleAddDebtWindow($event)">
+<app-display-container [header]="header" [displayData]="debts" [isAddingData]="addDebtWindowIsOpen || editDebtWindowIsOpen" (handleAdd)="handleAddDebtWindow($event)">
   <mat-card class="display-card" appearance="outlined" *ngFor="let debt of debts">
     <mat-card-header>
       <mat-card-title>{{ debt.title }}</mat-card-title>
@@ -8,9 +8,14 @@
       <p *ngIf="debt.dueDate">Due {{ debt.dueDate | dueDate }}</p>
       <p>Last Updated: {{ debt.lastUpdated | date: 'M/d/yy' }}</p>
     </mat-card-content>
+    <button mat-button [disabled]="addDebtWindowIsOpen || editDebtWindowIsOpen" (click)="handleEditDebtWindow(true, debt)">Edit</button>
   </mat-card>
 </app-display-container>
 
-<app-add-card *ngIf="addDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleAddDebtWindow($event)" (submitForm)="handleSubmitDebt($event)">
-  <app-edit-debts [debtForm]="debtForm" [debts]="debts" (updateForm)="handleUpdateForm($event)"></app-edit-debts>
+<app-add-card *ngIf="addDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleAddDebtWindow($event)" (submitForm)="handleSubmitAddDebt($event)">
+  <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="false" (updateForm)="handleUpdateForm($event)"></app-edit-debts>
 </app-add-card> 
+
+<app-edit-card *ngIf="editDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleEditDebtWindow($event)" (submitForm)="handleSubmitEditDebt($event)">
+  <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="true" (updateForm)="handleUpdateForm($event)"></app-edit-debts>
+</app-edit-card> 

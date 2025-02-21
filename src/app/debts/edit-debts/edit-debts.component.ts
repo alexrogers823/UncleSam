@@ -22,23 +22,24 @@ import { DebtService } from '../debt.service';
 export class EditDebtsComponent implements OnInit {
   @Input() debts!: Debt[];
   @Input() debtForm!: FormGroup;
+  @Input() isEditMode!: boolean;
   @Output() closeForm = new EventEmitter<boolean>();
   @Output() updateForm = new EventEmitter();
   
-  public constructor(
+  constructor(
     private formBuilder: FormBuilder,
     private debtService: DebtService
   ) { }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.formBuilder.group(this.debtForm);
   }
 
-  public close(): void {
+  close(): void {
     this.closeForm.emit(false);
   }
 
-  public update(field: string): void {
+  update(field: string): void {
     this.updateForm.emit({field, value: this.debtForm.value[field]});
   }
 }

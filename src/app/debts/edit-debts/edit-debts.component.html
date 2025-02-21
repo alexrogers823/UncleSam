@@ -1,7 +1,7 @@
 <div [formGroup]="debtForm">
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input matInput value="Discover" formControlName="title" (blur)="update('title')" required>
+    <input matInput formControlName="title" (blur)="update('title')" [disabled]="isEditMode" [required]="!isEditMode">
     <mat-error *ngIf="debtForm.controls.title.touched">
       <span>Need to provide a title</span>
     </mat-error>
