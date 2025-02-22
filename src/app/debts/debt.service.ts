@@ -9,7 +9,7 @@ import { Debt, DebtRequest } from '../models';
 export class DebtService {
   private debtsUrl: string = 'http://localhost:8000/debts/';
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
   debtsMockData: Debt[] = [
     {
