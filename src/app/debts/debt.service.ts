@@ -80,7 +80,7 @@ export class DebtService {
   }
 
   deleteDebt(id: number): Observable<Debt> {
-    return this.http.delete<Debt>(this.debtsUrl, this.httpOptions)
+    return this.http.delete<Debt>(`${this.debtsUrl}${id}/`, this.httpOptions)
       .pipe(
         catchError(this._handleError<Debt>())
       )

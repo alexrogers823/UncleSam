@@ -1,8 +1,9 @@
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { AddCardComponent, DisplayContainerComponent, EditCardComponent } from '../common';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCardComponent, DeleteModalComponent, DisplayContainerComponent, EditCardComponent } from '../common';
 import { Debt } from '../models';
 import { DueDatePipe } from '../pipes';
 import { DebtService } from './debt.service';
@@ -12,11 +13,13 @@ import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 @Component({
   selector: 'app-debts',
   standalone: true,
-  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, EditDebtsComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
+  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, EditDebtsComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './debts.component.html',
   styleUrl: './debts.component.scss'
 })
 export class DebtsComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
   header: string = 'Debts';
   debts: Debt[] = [];
   addDebtWindowIsOpen: boolean = false;
@@ -41,6 +44,18 @@ export class DebtsComponent implements OnInit {
   getDebts(): void {
     this.debtService.getDebts()
       .subscribe(debts => this.debts = debts);
+  }
+
+  openDeleteModal(debt: Debt): void {
+    const dialogRef = this.dialog.open(DeleteModalComponent, {
+      data: { title: debt.title }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.handleDeleteDebt(debt);
+      }
+    })
   }
 
   handleAddDebtWindow(event: boolean): void {
@@ -83,5 +98,13 @@ export class DebtsComponent implements OnInit {
     // TODO: Same as above 
     this.debtService.updateDebt(event)
       .subscribe();
+  }
+
+  handleDeleteDebt(event: any): void {
+    // TODO: Same as above 
+    this.debtService.deleteDebt(event.id)
+      .subscribe(() => {
+        this.debts = this.debts.filter(debt => debt.id !== event.id);
+      })
   }
 }

@@ -9,6 +9,7 @@
       <p>Last Updated: {{ debt.lastUpdated | date: 'M/d/yy' }}</p>
     </mat-card-content>
     <button mat-button [disabled]="addDebtWindowIsOpen || editDebtWindowIsOpen" (click)="handleEditDebtWindow(true, debt)">Edit</button>
+    <button mat-button (click)="openDeleteModal(debt)">Delete</button>
   </mat-card>
 </app-display-container>
 
