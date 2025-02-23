@@ -3,8 +3,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
+import { ArchiveService } from '../archives/archive.service';
 import { AddCardComponent, DeleteModalComponent, DisplayContainerComponent, EditCardComponent } from '../common';
-import { Debt } from '../models';
+import { ArchiveRequest, Debt } from '../models';
 import { DueDatePipe } from '../pipes';
 import { DebtService } from './debt.service';
 import { EditDebtsComponent } from './edit-debts/edit-debts.component';
@@ -27,14 +28,15 @@ export class DebtsComponent implements OnInit {
   debtForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private debtService: DebtService
+    private _formBuilder: FormBuilder,
+    private _debtService: DebtService,
+    private _archiveService: ArchiveService
   ) { }
 
   ngOnInit(): void {
     this.getDebts();
 
-    this.debtForm = this.formBuilder.group({
+    this.debtForm = this._formBuilder.group({
       title: [null, Validators.required],
       amount: [null, Validators.required],
       dueDate: null
@@ -42,8 +44,8 @@ export class DebtsComponent implements OnInit {
   }
 
   getDebts(): void {
-    this.debtService.getDebts()
-      .subscribe(debts => this.debts = debts);
+    this._debtService.getDebts()
+      .subscribe((debts: Debt[]) => this.debts = debts);
   }
 
   openDeleteModal(debt: Debt): void {
@@ -51,7 +53,7 @@ export class DebtsComponent implements OnInit {
       data: { title: debt.title }
     });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
+    dialogRef.afterClosed().subscribe((result: boolean): void => {
       if (result) {
         this.handleDeleteDebt(debt);
       }
@@ -59,7 +61,8 @@ export class DebtsComponent implements OnInit {
   }
 
   handleAddDebtWindow(event: boolean): void {
-    this.debtForm = this.formBuilder.group({
+    // clearing form in case there was an add/edit previously 
+    this.debtForm = this._formBuilder.group({
       title: [null, Validators.required],
       amount: [null, Validators.required],
       dueDate: null
@@ -70,7 +73,7 @@ export class DebtsComponent implements OnInit {
 
   handleEditDebtWindow(event: boolean, debt: Debt | null = null): void {
     if (debt) {
-      this.debtForm = this.formBuilder.group({
+      this.debtForm = this._formBuilder.group({
         id: debt.id,
         title: [debt.title, Validators.required],
         amount: [debt.amount, Validators.required],
@@ -87,24 +90,39 @@ export class DebtsComponent implements OnInit {
   }
 
   handleSubmitAddDebt(event: any): void {
-    // TODO: Trigger an on change strategy 
-    this.debtService.addDebt(event)
-      .subscribe(debt => {
+    // TODO: Trigger an on change strategy
+    this._debtService.addDebt(event)
+      .subscribe((debt: Debt): void => {
         this.debts.push(debt);
       })
+
+    this._addToArchives(event);
+
   }
 
   handleSubmitEditDebt(event: any): void {
     // TODO: Same as above 
-    this.debtService.updateDebt(event)
+    this._debtService.updateDebt(event)
       .subscribe();
+
+    this._addToArchives(event);
   }
 
   handleDeleteDebt(event: any): void {
     // TODO: Same as above 
-    this.debtService.deleteDebt(event.id)
+    this._debtService.deleteDebt(event.id)
       .subscribe(() => {
         this.debts = this.debts.filter(debt => debt.id !== event.id);
       })
+  }
+
+  private _addToArchives(obj: any): void {
+    const archive: ArchiveRequest = { 
+      type: 'Debt',
+      title: obj.title,
+      amount: obj.amount
+    }
+
+    this._archiveService.addToArchives(archive).subscribe();
   }
 }

@@ -1,27 +1,33 @@
-<form>
+<div [formGroup]="savingForm">
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input matInput value="Berlin">
+    <input matInput formControlName="title" (blur)="update('title')" [disabled]="isEditMode" [required]="!isEditMode">
+    <mat-error *ngIf="savingForm.controls.title.touched">
+      <span>Need to provide a title</span>
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Priority</mat-label>
-    <input matInput type="number" min="1" value="1">
+    <input matInput formControlName="priority" type="number" min="1" (blur)="update('priority')">
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field class="no-input-arrows">
     <mat-label>Current Amount</mat-label>
-    <input matInput>
+    <input matInput formControlName="currentAmount" type="number" min="0" (blur)="update('currentAmount')" required>
+    <mat-error *ngIf="savingForm.controls.currentAmount.touched">
+      <span>Need to specify an amount</span>
+    </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field class="no-input-arrows">
     <mat-label>Goal Amount</mat-label>
-    <input matInput>
+    <input matInput formControlName="goalAmount" type="number" min="0" (blur)="update('goalAmount')">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Goal Date</mat-label>
-    <input matInput [min]="currentDate" [matDatepicker]="picker">
+    <input matInput formControlName="goalDate" [min]="currentDate" [matDatepicker]="picker" (dateChange)="update('goalDate')">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
@@ -40,7 +46,4 @@
       </mat-radio-group>
     </mat-expansion-panel>
   </mat-accordion>
-
-  <button mat-button>Yes</button>
-  <button mat-button>No</button>
-</form>
+</div>

@@ -1,23 +1,26 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>{{ header }}</mat-card-title>
-    <mat-card-subtitle>Total {{ header }}: {{ savings.length }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-card class="display-card" appearance="outlined" *ngFor="let saving of savings">
-      <mat-card-header>
-        <mat-card-title>{{ saving.title }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div>
-          <span>{{ saving.currentAmount | currency }}</span>
-          <span *ngIf="saving.goalAmount">/ {{ saving.goalAmount | currency }}</span>
-        </div>
-        <p *ngIf="saving.goalDate">Goal {{ saving.goalDate | goalDate }}</p>
-        <p>(Progress Bar)</p>
-        <p>Last Updated: {{ saving.lastUpdated | date: 'M/d/yy' }}</p>
-      </mat-card-content>
-    </mat-card>
-  </mat-card-content>
-</mat-card>
-<app-edit-savings></app-edit-savings>
+<app-display-container [header]="header" [displayData]="savings" [isAddingData]="addSavingWindowIsOpen || editSavingWindowIsOpen" (handleAdd)="handleAddSavingWindow($event)">
+  <mat-card class="display-card" appearance="outlined" *ngFor="let saving of savings">
+    <mat-card-header>
+      <mat-card-title>{{ saving.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <span>{{ saving.currentAmount | currency }}</span>
+        <span *ngIf="saving.goalAmount">/ {{ saving.goalAmount | currency }}</span>
+      </div>
+      <p *ngIf="saving.goalDate">Goal {{ saving.goalDate | goalDate }}</p>
+      <p>(Progress Bar)</p>
+      <p>Last Updated: {{ saving.lastUpdated | date: 'M/d/yy' }}</p>
+    </mat-card-content>
+    <button mat-button [disabled]="addSavingWindowIsOpen || editSavingWindowIsOpen" (click)="handleEditSavingWindow(true, saving)">Edit</button>
+    <button mat-button (click)="openDeleteModal(saving)">Delete</button>
+  </mat-card>
+</app-display-container>
+
+<app-add-card *ngIf="addSavingWindowIsOpen" [formData]="savingForm" (closeForm)="handleAddSavingWindow($event)" (submitForm)="handleSubmitAddSaving($event)">
+  <app-edit-savings [savingForm]="savingForm" [isEditMode]="false" (updateForm)="handleUpdateForm($event)" />
+</app-add-card>
+
+<app-edit-card *ngIf="editSavingWindowIsOpen" [formData]="savingForm" (closeForm)="handleEditSavingWindow($event)" (submitForm)="handleSubmitEditSaving($event)">
+  <app-edit-savings [savingForm]="savingForm" [isEditMode]="true" (updateForm)="handleUpdateForm($event)" />
+</app-edit-card>

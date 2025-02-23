@@ -7,8 +7,8 @@ import { Debt, DebtRequest } from '../models';
   providedIn: 'root'
 })
 export class DebtService {
-  private debtsUrl: string = 'http://localhost:8000/debts/';
-  private httpOptions = {
+  private _debtsUrl: string = 'http://localhost:8000/debts/';
+  private _httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
   debtsMockData: Debt[] = [
@@ -28,11 +28,11 @@ export class DebtService {
   ]
 
   constructor(
-    private http: HttpClient
+    private _http: HttpClient
   ) { }
 
   getDebts(): Observable<Debt[]> {
-    return this.http.get<Debt[]>(this.debtsUrl)
+    return this._http.get<Debt[]>(this._debtsUrl)
       .pipe(
         map((res: any[]): Debt[] => {
           return res.map((d: any): Debt => ({
@@ -48,7 +48,7 @@ export class DebtService {
   }
 
   getDebt(id: number): Observable<Debt> {
-    return this.http.get<Debt>(`${this.debtsUrl}${id}/`)
+    return this._http.get<Debt>(`${this._debtsUrl}${id}/`)
       .pipe(
         map((res: any): Debt => ({
           id: res.id,
@@ -64,26 +64,17 @@ export class DebtService {
   updateDebt(debt: Debt): Observable<Debt> {
     const mappedRequest = this._mapFieldNames(debt, 'put');
 
-    return this.http.put<Debt>(`${this.debtsUrl}${debt.id}/`, mappedRequest, this.httpOptions)
-      .pipe(
-        catchError(this._handleError<any>())
-      )
+    return this._http.put<Debt>(`${this._debtsUrl}${debt.id}/`, mappedRequest, this._httpOptions);
   }
 
   addDebt(debtRequest: DebtRequest): Observable<Debt> {
     const mappedRequest = this._mapFieldNames(debtRequest, 'request');
 
-    return this.http.post<Debt>(this.debtsUrl, mappedRequest, this.httpOptions)
-      .pipe(
-        catchError(this._handleError<Debt>())
-      )
+    return this._http.post<Debt>(this._debtsUrl, mappedRequest, this._httpOptions);
   }
 
   deleteDebt(id: number): Observable<Debt> {
-    return this.http.delete<Debt>(`${this.debtsUrl}${id}/`, this.httpOptions)
-      .pipe(
-        catchError(this._handleError<Debt>())
-      )
+    return this._http.delete<Debt>(`${this._debtsUrl}${id}/`, this._httpOptions);
   }
 
   private _mapFieldNames(obj: any, direction: string = 'response'): any {
@@ -91,7 +82,7 @@ export class DebtService {
       return {
         title: obj.title,
         amount: obj.amount,
-        due_date: obj.dueDate.toISOString().substring(0, 10)
+        due_date: obj.dueDate ? obj.dueDate.toISOString().substring(0, 10) : null
       }
     } else if (direction === 'put') {
       return {
@@ -99,7 +90,7 @@ export class DebtService {
         title: obj.title,
         amount: obj.amount,
         updated: obj.lastUpdated,
-        due_date: obj.dueDate.toISOString().substring(0, 10)
+        due_date: obj.dueDate ? obj.dueDate.toISOString().substring(0, 10) : null
       }
     }
 

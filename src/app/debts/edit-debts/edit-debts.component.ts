@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { AddCardComponent } from 'src/app/common';
 import { Debt } from 'src/app/models';
-import { DebtService } from '../debt.service';
 
 @Component({
   selector: 'app-edit-debts',
@@ -25,14 +24,14 @@ export class EditDebtsComponent implements OnInit {
   @Input() isEditMode!: boolean;
   @Output() closeForm = new EventEmitter<boolean>();
   @Output() updateForm = new EventEmitter();
+  currentDate: Date = new Date();
   
   constructor(
-    private formBuilder: FormBuilder,
-    private debtService: DebtService
+    private _formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
-    this.formBuilder.group(this.debtForm);
+    this._formBuilder.group(this.debtForm);
   }
 
   close(): void {
@@ -40,6 +39,6 @@ export class EditDebtsComponent implements OnInit {
   }
 
   update(field: string): void {
-    this.updateForm.emit({field, value: this.debtForm.value[field]});
+    this.updateForm.emit({ field, value: this.debtForm.value[field] });
   }
 }
