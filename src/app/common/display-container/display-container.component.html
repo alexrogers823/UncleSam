@@ -2,6 +2,7 @@
   <mat-card-header>
     <mat-card-title>{{ header }}</mat-card-title>
     <mat-card-subtitle>Total {{ header }}: {{ displayData.length }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ displayTotalAmountMessage() }}: {{ summary | currency }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <ng-content />
