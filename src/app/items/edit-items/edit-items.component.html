@@ -1,18 +1,26 @@
-<form>
+<div [formGroup]="itemForm">
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input matInput value="Bowling Ball">
+    <input matInput formControlName="title" (blur)="update('title')" [disabled]="isEditMode" [required]="!isEditMode">
+    <mat-error *ngIf="itemForm.controls.title.touched">
+      <span>Need to provide a title</span>
+    </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field class="no-input-arrows">
     <mat-label>Amount</mat-label>
-    <input matInput>
+    <input matInput formControlName="amount" type="number" min="0" (blur)="update('amount')" required>
+    <mat-error *ngIf="itemForm.controls.amount.touched">
+      <span>Need to specify an amount</span>
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>URL</mat-label>
-    <input matInput type="url">
+    <input matInput formControlName="url" type="url" (blur)="update('url')">
   </mat-form-field>
 
-  <mat-checkbox>Completed</mat-checkbox>
-</form>
+  <mat-checkbox formControlName="completed" (blur)="update('completed')">
+    Completed
+  </mat-checkbox>
+</div>

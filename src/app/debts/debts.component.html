@@ -14,9 +14,9 @@
 </app-display-container>
 
 <app-add-card *ngIf="addDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleAddDebtWindow($event)" (submitForm)="handleSubmitAddDebt($event)">
-  <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="false" (updateForm)="handleUpdateForm($event)"></app-edit-debts>
+  <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="false" (updateForm)="handleUpdateForm($event)" />
 </app-add-card> 
 
 <app-edit-card *ngIf="editDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleEditDebtWindow($event)" (submitForm)="handleSubmitEditDebt($event)">
-  <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="true" (updateForm)="handleUpdateForm($event)"></app-edit-debts>
+  <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="true" (updateForm)="handleUpdateForm($event)" />
 </app-edit-card> 

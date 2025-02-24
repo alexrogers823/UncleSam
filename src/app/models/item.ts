@@ -2,7 +2,7 @@ export interface Item {
   id: number;
   title: string;
   amount: number;
-  created: string;
+  createdDate: string;
   url?: string;
   completed: boolean;
 }
