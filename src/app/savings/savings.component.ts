@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { ArchiveService } from '../archives/archive.service';
-import { AddCardComponent, DeleteModalComponent, DisplayContainerComponent, EditCardComponent } from '../common';
+import { AddCardComponent, AreaChartComponent, DeleteModalComponent, DisplayContainerComponent, EditCardComponent, LineChartComponent } from '../common';
 import { ProgressBarComponent } from '../common/progress-bar/progress-bar.component';
 import { ArchiveRequest, Saving } from '../models';
 import { GoalDatePipe } from '../pipes/goal-date/goal-date.pipe';
@@ -14,7 +14,7 @@ import { SavingService } from './saving.service';
 @Component({
   selector: 'app-savings',
   standalone: true,
-  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, ProgressBarComponent, EditSavingsComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, GoalDatePipe],
+  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, LineChartComponent, AreaChartComponent, ProgressBarComponent, EditSavingsComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, GoalDatePipe],
   templateUrl: './savings.component.html',
   styleUrl: './savings.component.scss'
 })

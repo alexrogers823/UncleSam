@@ -2,13 +2,13 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
-  selector: 'app-bar-chart',
+  selector: 'app-line-chart',
   standalone: true,
   imports: [],
-  templateUrl: './bar-chart.component.html',
-  styleUrl: './bar-chart.component.scss'
+  templateUrl: './line-chart.component.html',
+  styleUrl: './line-chart.component.scss'
 })
-export class BarChartComponent implements OnChanges {
+export class LineChartComponent implements OnChanges {
   chart: any;
   @Input() chartData: any[] = [];
   @Input() label!: string;
@@ -17,15 +17,17 @@ export class BarChartComponent implements OnChanges {
     if (this.chart) {
       this.chart.destroy();
     }
+
     this._createChart();
   }
 
   private _createChart(): void {
-    this.chart = new Chart("BarChart", {
-      type: 'bar', 
+    // using archive data 
+    this.chart = new Chart("LineChart", {
+      type: 'line',
       data: {
-        // values on X-Axis
-        labels: this.chartData.map(d => d.title), 
+        // values on X-axis 
+        labels: this.chartData.map(d => d.title),
         datasets: [
           {
             label: this.label,
@@ -37,12 +39,12 @@ export class BarChartComponent implements OnChanges {
               return d.amount;
             }),
             backgroundColor: 'blue'
-          },
-        ]
+          }
+        ],
       },
       options: {
         aspectRatio: 2.5
       }
-    });
+    })
   }
 }
