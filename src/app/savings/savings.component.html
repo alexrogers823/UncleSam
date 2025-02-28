@@ -24,3 +24,5 @@
 <app-edit-card *ngIf="editSavingWindowIsOpen" [formData]="savingForm" (closeForm)="handleEditSavingWindow($event)" (submitForm)="handleSubmitEditSaving($event)">
   <app-edit-savings [savingForm]="savingForm" [isEditMode]="true" (updateForm)="handleUpdateForm($event)" />
 </app-edit-card>
+
+<app-progress-bar></app-progress-bar>
