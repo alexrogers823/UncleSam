@@ -10,7 +10,7 @@ import Chart from 'chart.js/auto';
 })
 export class LineChartComponent implements OnChanges {
   chart: any;
-  @Input() chartData: any[] = [];
+  @Input() chartData: any = {};
   @Input() label!: string;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -21,29 +21,49 @@ export class LineChartComponent implements OnChanges {
     this._createChart();
   }
 
+  private _arrangeDateLabels(): void {
+
+  }
+
   private _createChart(): void {
     // using archive data 
     this.chart = new Chart("LineChart", {
       type: 'line',
       data: {
         // values on X-axis 
-        labels: this.chartData.map(d => d.title),
-        datasets: [
-          {
-            label: this.label,
-            data: this.chartData.map(d => {
-              if (d.currentAmount) {
-                return d.currentAmount;
-              }
+        labels: this.chartData.type,
+        // datasets: [
+        //   {
+        //     label: this.label,
+        //     data: this.chartData.map(d => {
+        //       if (d.currentAmount) {
+        //         return d.currentAmount;
+        //       }
 
-              return d.amount;
-            }),
+        //       return d.amount;
+        //     }),
+        //     backgroundColor: 'blue'
+        //   }
+        // ],
+        datasets: this.chartData.data.map((instance: any) => (
+          {
+            label: instance.title,
+            data: instance.history.map((h: any) => h.amount),
             backgroundColor: 'blue'
           }
-        ],
+        ))
       },
       options: {
-        aspectRatio: 2.5
+        aspectRatio: 2.5,
+        plugins: {
+          legend: {
+            position: 'top'
+          },
+          title: {
+            display: true,
+            text: this.chartData.type
+          }
+        }
       }
     })
   }

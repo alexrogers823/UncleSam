@@ -1,5 +1,5 @@
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,6 +20,7 @@ import { SavingService } from './saving.service';
 })
 export class SavingsComponent implements OnInit {
   readonly dialog = inject(MatDialog);
+  @Input() savingsChartData: any;
   header: string = 'Savings';
   savings: Saving[] = [];
   addSavingWindowIsOpen: boolean = false;
@@ -42,6 +43,8 @@ export class SavingsComponent implements OnInit {
       goalAmount: null,
       goalDate: null
     })
+
+    console.log('in savings component', this.savingsChartData)
   }
 
   getSavings(): void {

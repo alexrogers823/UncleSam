@@ -1,5 +1,5 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,6 +19,7 @@ import { ItemService } from './item.service';
 })
 export class ItemsComponent implements OnInit {
   readonly dialog = inject(MatDialog);
+  @Input() itemsChartData: any;
   header: string = 'Items';
   items: Item[] = [];
   addItemWindowIsOpen: boolean = false;

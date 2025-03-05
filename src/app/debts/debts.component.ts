@@ -1,5 +1,5 @@
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,6 +21,7 @@ import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 })
 export class DebtsComponent implements OnInit {
   readonly dialog = inject(MatDialog);
+  @Input() debtsChartData: any;
   header: string = 'Debts';
   debts: Debt[] = [];
   addDebtWindowIsOpen: boolean = false;
