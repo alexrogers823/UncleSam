@@ -26,3 +26,5 @@
 <app-edit-card *ngIf="editItemWindowIsOpen" [formData]="itemForm" (closeForm)="handleEditItemWindow($event)" (submitForm)="handleSubmitEditItem($event)">
   <app-edit-items [itemForm]="itemForm" [items]="items" [isEditMode]="true" (updateForm)="handleUpdateForm($event)" />
 </app-edit-card>
+
+<app-bar-chart *ngIf="itemsChartData" [chartData]="itemsChartData" label="Items" />

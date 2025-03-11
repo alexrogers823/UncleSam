@@ -25,4 +25,5 @@
   <app-edit-savings [savingForm]="savingForm" [isEditMode]="true" (updateForm)="handleUpdateForm($event)" />
 </app-edit-card>
 
-<app-progress-bar></app-progress-bar>
+<!-- <app-progress-bar></app-progress-bar> -->
+<app-area-chart *ngIf="savingsChartData" [chartData]="savingsChartData" label="Savings" />

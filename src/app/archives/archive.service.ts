@@ -31,6 +31,13 @@ export class ArchiveService {
       )
   }
 
+  getChartData(): Observable<any> {
+    return this._http.get(`${this._archivesUrl}charts/`)
+      .pipe(
+        catchError(this._handleError([]))
+      )
+  }
+
   addToArchives(archiveRequest: ArchiveRequest): Observable<Archive> {
     return this._http.post<Archive>(this._archivesUrl, archiveRequest, this._httpOptions)
       .pipe(

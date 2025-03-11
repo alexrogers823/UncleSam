@@ -20,3 +20,5 @@
 <app-edit-card *ngIf="editDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleEditDebtWindow($event)" (submitForm)="handleSubmitEditDebt($event)">
   <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="true" (updateForm)="handleUpdateForm($event)" />
 </app-edit-card> 
+
+<app-line-chart *ngIf="debtsChartData" [chartData]="debtsChartData" label="Debts" />
