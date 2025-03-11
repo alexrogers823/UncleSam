@@ -27,4 +27,4 @@
   <app-edit-items [itemForm]="itemForm" [items]="items" [isEditMode]="true" (updateForm)="handleUpdateForm($event)" />
 </app-edit-card>
 
-<app-bar-chart [chartData]="items" label="Items" />
+<app-bar-chart *ngIf="itemsChartData" [chartData]="itemsChartData" label="Items" />
