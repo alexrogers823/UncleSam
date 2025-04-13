@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditSavingsComponent } from './edit-savings.component';
 
 describe('EditSavingsComponent', () => {
@@ -8,13 +9,12 @@ describe('EditSavingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditSavingsComponent]
+      imports: [EditSavingsComponent, BrowserAnimationsModule]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(EditSavingsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

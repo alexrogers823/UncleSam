@@ -14,7 +14,6 @@ describe('AreaChartComponent', () => {
 
     fixture = TestBed.createComponent(AreaChartComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
