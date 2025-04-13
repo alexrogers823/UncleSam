@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideHttpClient } from '@angular/common/http';
 import { SavingsComponent } from './savings.component';
 
 describe('SavingsComponent', () => {
@@ -8,13 +9,15 @@ describe('SavingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SavingsComponent]
+      imports: [SavingsComponent],
+      providers: [
+        provideHttpClient()
+      ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(SavingsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

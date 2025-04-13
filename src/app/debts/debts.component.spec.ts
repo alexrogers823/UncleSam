@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideHttpClient } from '@angular/common/http';
 import { DebtsComponent } from './debts.component';
 
 describe('DebtsComponent', () => {
@@ -8,13 +9,15 @@ describe('DebtsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DebtsComponent]
+      imports: [DebtsComponent],
+      providers: [
+        provideHttpClient()
+      ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(DebtsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
