@@ -14,7 +14,6 @@ describe('ArchivesComponent', () => {
 
     fixture = TestBed.createComponent(ArchivesComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
