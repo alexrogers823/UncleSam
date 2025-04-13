@@ -14,7 +14,6 @@ describe('ProgressBarComponent', () => {
 
     fixture = TestBed.createComponent(ProgressBarComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
