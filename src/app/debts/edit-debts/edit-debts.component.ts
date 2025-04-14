@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -14,7 +15,7 @@ import { Debt } from 'src/app/models';
   selector: 'app-edit-debts',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [AddCardComponent, FormsModule, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDatepickerModule, MatExpansionModule],
+  imports: [AddCardComponent, FormsModule, ReactiveFormsModule, MatCardModule, CommonModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDatepickerModule, MatExpansionModule],
   templateUrl: './edit-debts.component.html',
   styleUrl: './edit-debts.component.scss'
 })

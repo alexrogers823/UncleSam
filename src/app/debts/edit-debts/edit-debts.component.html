@@ -1,5 +1,5 @@
 <div [formGroup]="debtForm">
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-label>Title</mat-label>
     <input matInput formControlName="title" (blur)="update('title')" [disabled]="isEditMode" [required]="!isEditMode">
     <mat-error *ngIf="debtForm.controls.title.touched">
@@ -35,5 +35,46 @@
         <mat-radio-button>One-Time</mat-radio-button>
       </mat-radio-group>
     </mat-expansion-panel>
-  </mat-accordion>
+  </mat-accordion> -->
+  <mat-card class="edit-card" appearance="outlined">
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput disabled [value]="debtForm.controls.title.value">
+        <mat-error *ngIf="debtForm.controls.title.touched">
+          <span>Need to provide a title</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="no-input-arrows">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" formControlName="amount" min="0" (blur)="update('amount')" required>
+        <mat-error *ngIf="debtForm.controls.amount.touched">
+          <span>Need to specify an amount</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Due Date</mat-label>
+        <input matInput formControlName="dueDate" [min]="currentDate" [matDatepicker]="picker" (dateChange)="update('dueDate')">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Recurring</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-radio-group>
+            <mat-radio-button>Weekly</mat-radio-button>
+            <mat-radio-button>Monthly</mat-radio-button>
+            <mat-radio-button>Yearly</mat-radio-button>
+            <mat-radio-button>One-Time</mat-radio-button>
+          </mat-radio-group>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
 </div>
