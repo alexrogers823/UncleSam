@@ -42,7 +42,6 @@ export class BarChartComponent implements OnChanges {
         datasets: [
           {
             data: this.chartData.data.map((instance: any) => instance.history[0].amount),
-            backgroundColor: 'blue'
           }
         ],
       },

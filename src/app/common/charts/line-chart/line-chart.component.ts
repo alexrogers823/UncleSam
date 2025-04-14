@@ -60,7 +60,6 @@ export class LineChartComponent implements OnChanges {
           {
             label: instance.title,
             data: this._arrangeAmountDataPoints(instance.history),
-            backgroundColor: 'blue'
           }
         ))
       },

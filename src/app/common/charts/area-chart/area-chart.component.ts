@@ -59,7 +59,6 @@ export class AreaChartComponent implements OnChanges {
           {
             label: instance.title,
             data: this._arrangeAmountDataPoints(instance.history),
-            backgroundColor: 'blue',
             fill: 'start'
           }
         ))
