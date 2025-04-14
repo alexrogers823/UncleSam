@@ -3,6 +3,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { ArchiveService } from '../archives/archive.service';
 import { AddCardComponent, DeleteModalComponent, DisplayContainerComponent, EditCardComponent, LineChartComponent } from '../common';
 import { ArchiveRequest, Debt } from '../models';
@@ -14,7 +15,7 @@ import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 @Component({
   selector: 'app-debts',
   standalone: true,
-  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, EditDebtsComponent, LineChartComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
+  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, EditDebtsComponent, LineChartComponent, MatCardModule, MatIconModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
   // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './debts.component.html',
   styleUrl: './debts.component.scss'
