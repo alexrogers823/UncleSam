@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { pluralize } from 'src/app/utils';
+import { getRandomColor, pluralize } from 'src/app/utils';
 
 @Component({
   selector: 'app-bar-chart',
@@ -32,6 +32,12 @@ export class BarChartComponent implements OnChanges {
     return [history[0].amount];
   }
 
+  private _setBackgroundColor(): string {
+    const [red, green, blue] = [getRandomColor(), getRandomColor(), getRandomColor()]
+    console.log(red, green, blue)
+    return `rgba(${red}, ${green}, ${blue}, 0.2)`
+  }
+
   private _createChart(): void {
     // using archive data 
     this.chart = new Chart("BarChart", {
@@ -41,8 +47,8 @@ export class BarChartComponent implements OnChanges {
         labels: this.dateLabels,
         datasets: [
           {
-            data: this.chartData.data.map((instance: any) => instance.history[0].amount),
-            backgroundColor: 'blue'
+            data: this.chartData.data.map((instance: any) => instance.history[instance.history.length-1].amount),
+            backgroundColor: this.chartData.data.map((_: any) => this._setBackgroundColor())
           }
         ],
       },

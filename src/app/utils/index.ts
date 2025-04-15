@@ -5,3 +5,7 @@ export const calculateSummary = (data: any[], field: string): number => {
 export const pluralize = (title: string): string => {
   return title + 's';
 }
+
+export const getRandomColor = (): number => {
+  return Math.round(Math.random() * 256)
+}
