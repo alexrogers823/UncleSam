@@ -1,7 +1,13 @@
 .edit-card {
-  max-width: 200px;
+  max-width: 300px;
   border-radius: 5px;
   border-width: 2px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
 }
 
 

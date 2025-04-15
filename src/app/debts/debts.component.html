@@ -8,8 +8,12 @@
       <p *ngIf="debt.dueDate">Due {{ debt.dueDate | dueDate }}</p>
       <p>Last Updated: {{ debt.lastUpdated | date: 'M/d/yy' }}</p>
     </mat-card-content>
-    <button mat-button [disabled]="addDebtWindowIsOpen || editDebtWindowIsOpen" (click)="handleEditDebtWindow(true, debt)">Edit</button>
-    <button mat-button (click)="openDeleteModal(debt)">Delete</button>
+    <button mat-fab [disabled]="addDebtWindowIsOpen || editDebtWindowIsOpen" (click)="handleEditDebtWindow(true, debt)">
+      <mat-icon>edit_square</mat-icon>
+    </button>
+    <button mat-fab (click)="openDeleteModal(debt)">
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-card>
 </app-display-container>
 

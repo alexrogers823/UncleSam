@@ -1,7 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatCardModule } from "@angular/material/card";
 import { provideNativeDateAdapter } from "@angular/material/core";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-edit-card',
@@ -9,7 +11,7 @@ import { provideNativeDateAdapter } from "@angular/material/core";
   styleUrl: './edit-card.component.scss',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [FormsModule, ReactiveFormsModule, CommonModule]
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatCardModule, MatIconModule]
 })
 export class EditCardComponent {
   @Input() formData!: FormGroup;

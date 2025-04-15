@@ -1,6 +1,17 @@
 <form [formGroup]="formData">
-  <ng-content />
+  <mat-card class="edit-card" appearance="outlined">
+    <mat-card-content>
+      <ng-content />
+    </mat-card-content>
 
-  <button mat-button type="submit" (click)="submit()">Yes</button>
-  <button mat-button type="button" (click)="close()">No</button>
+    <div class="action-buttons">
+      <button mat-fab type="submit" (click)="submit()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-fab type="button" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+
 </form>
