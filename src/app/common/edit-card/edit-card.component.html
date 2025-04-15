@@ -4,12 +4,14 @@
       <ng-content />
     </mat-card-content>
 
-    <button mat-fab type="submit" (click)="submit()">
-      <mat-icon>check</mat-icon>
-    </button>
-    <button mat-fab type="button" (click)="close()">
-      <mat-icon>close</mat-icon>
-    </button>
+    <div class="action-buttons">
+      <button mat-fab type="submit" (click)="submit()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-fab type="button" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
   </mat-card>
 
 </form>
