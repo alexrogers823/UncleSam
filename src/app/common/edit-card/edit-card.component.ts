@@ -15,7 +15,7 @@ import { MatIconModule } from "@angular/material/icon";
 })
 export class EditCardComponent implements OnInit {
   @Input() formData!: FormGroup;
-  @Output() closeForm = new EventEmitter<boolean>();
+  @Output() closeForm = new EventEmitter<any>();
   @Output() submitForm = new EventEmitter<any>();
 
   constructor(

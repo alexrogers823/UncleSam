@@ -34,7 +34,6 @@ export class BarChartComponent implements OnChanges {
 
   private _setBackgroundColor(): string {
     const [red, green, blue] = [getRandomColor(), getRandomColor(), getRandomColor()]
-    console.log(red, green, blue)
     return `rgba(${red}, ${green}, ${blue}, 0.2)`
   }
 

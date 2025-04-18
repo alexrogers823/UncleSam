@@ -22,7 +22,7 @@ export class EditDebtsComponent implements OnInit {
   @Input() debts!: Debt[];
   @Input() debtForm!: FormGroup;
   @Input() isEditMode!: boolean;
-  @Output() closeForm = new EventEmitter<boolean>();
+  @Output() closeForm = new EventEmitter<any>();
   @Output() updateForm = new EventEmitter();
   currentDate: Date = new Date();
   

@@ -1,5 +1,5 @@
 <app-display-container [header]="header" [displayData]="debts" [isAddingData]="addDebtWindowIsOpen || editDebtWindowIsOpen" (handleAdd)="handleAddDebtWindow($event)">
-  <mat-card class="display-card" appearance="outlined" *ngFor="let debt of debts">
+  <!-- <mat-card class="display-card" appearance="outlined" *ngFor="let debt of debts">
     <mat-card-header>
       <mat-card-title>{{ debt.title }}</mat-card-title>
     </mat-card-header>
@@ -12,19 +12,28 @@
       <button mat-fab [disabled]="addDebtWindowIsOpen || editDebtWindowIsOpen" (click)="handleEditDebtWindow(true, debt)">
         <mat-icon>edit_square</mat-icon>
       </button>
-      <button mat-fab (click)="openDeleteModal(debt)">
+      <button mat-fab [disabled]="addDebtWindowIsOpen || editDebtWindowIsOpen" (click)="openDeleteModal(debt)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
-  </mat-card>
+  </mat-card> -->
 
+  @for (debt of debts; track debt.title) {
+    <app-display-card
+      [entity]="debt" 
+      [cardDisabled]="addDebtWindowIsOpen || editDebtWindowIsOpen"
+      (openEditCard)="handleEditDebtWindow($event)"
+      (openDeleteModal)="openDeleteModal($event)"
+    />
+  }
+  
   <app-edit-card *ngIf="addDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleAddDebtWindow($event)" (submitForm)="handleSubmitAddDebt($event)">
     <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="false" (updateForm)="handleUpdateForm($event)" />
   </app-edit-card> 
   
   <app-edit-card *ngIf="editDebtWindowIsOpen" [formData]="debtForm" (closeForm)="handleEditDebtWindow($event)" (submitForm)="handleSubmitEditDebt($event)">
     <app-edit-debts [debtForm]="debtForm" [debts]="debts" [isEditMode]="true" (updateForm)="handleUpdateForm($event)" />
-  </app-edit-card> 
+  </app-edit-card>
   
 </app-display-container>
 

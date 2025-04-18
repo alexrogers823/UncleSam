@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ArchiveService } from '../archives/archive.service';
-import { AddCardComponent, DeleteModalComponent, DisplayContainerComponent, EditCardComponent, LineChartComponent } from '../common';
+import { AddCardComponent, DeleteModalComponent, DisplayCardComponent, DisplayContainerComponent, EditCardComponent, LineChartComponent } from '../common';
 import { ArchiveRequest, Debt } from '../models';
 import { DueDatePipe } from '../pipes';
 import { DebtService } from './debt.service';
@@ -15,7 +15,7 @@ import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 @Component({
   selector: 'app-debts',
   standalone: true,
-  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, EditDebtsComponent, LineChartComponent, MatCardModule, MatIconModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
+  imports: [DisplayContainerComponent, AddCardComponent, DisplayCardComponent, EditCardComponent, DeleteModalComponent, EditDebtsComponent, LineChartComponent, MatCardModule, MatIconModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
   // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './debts.component.html',
   styleUrl: './debts.component.scss'
@@ -73,18 +73,20 @@ export class DebtsComponent implements OnInit {
     this.addDebtWindowIsOpen = event;
   }
 
-  handleEditDebtWindow(event: boolean, debt: Debt | null = null): void {
-    if (debt) {
+  handleEditDebtWindow(event: {shouldEdit: boolean, data: Debt | null}): void {
+    const { shouldEdit, data } = event;
+    
+    if (data) {
       this.debtForm = this._formBuilder.group({
-        id: debt.id,
-        title: [debt.title, Validators.required],
-        amount: [debt.amount, Validators.required],
-        lastUpdated: debt.lastUpdated,
-        dueDate: debt.dueDate ? new Date(debt.dueDate) : null
+        id: data.id,
+        title: [data.title, Validators.required],
+        amount: [data.amount, Validators.required],
+        lastUpdated: data.lastUpdated,
+        dueDate: data.dueDate ? new Date(data.dueDate) : null
       });
     }
 
-    this.editDebtWindowIsOpen = event;
+    this.editDebtWindowIsOpen = shouldEdit;
   }
 
   handleUpdateForm(event: {field: string, value: any}): void {
