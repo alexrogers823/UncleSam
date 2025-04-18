@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { ArchiveService } from '../archives/archive.service';
-import { AddCardComponent, AreaChartComponent, DeleteModalComponent, DisplayContainerComponent, EditCardComponent } from '../common';
+import { AddCardComponent, AreaChartComponent, DeleteModalComponent, DisplayCardComponent, DisplayContainerComponent, EditCardComponent } from '../common';
 import { ProgressBarComponent } from '../common/progress-bar/progress-bar.component';
 import { ArchiveRequest, Saving } from '../models';
 import { GoalDatePipe } from '../pipes/goal-date/goal-date.pipe';
@@ -14,7 +14,7 @@ import { SavingService } from './saving.service';
 @Component({
   selector: 'app-savings',
   standalone: true,
-  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, AreaChartComponent, ProgressBarComponent, EditSavingsComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, GoalDatePipe],
+  imports: [DisplayContainerComponent, DisplayCardComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, AreaChartComponent, ProgressBarComponent, EditSavingsComponent, MatCardModule, CommonModule, CurrencyPipe, DatePipe, GoalDatePipe],
   templateUrl: './savings.component.html',
   styleUrl: './savings.component.scss'
 })
@@ -75,20 +75,22 @@ export class SavingsComponent implements OnInit {
     this.addSavingWindowIsOpen = event;
   }
 
-  handleEditSavingWindow(event: boolean, saving: Saving | null = null): void {
-    if (saving) {
+  handleEditSavingWindow(event: {shouldEdit: boolean, data: Saving | null}): void {
+    const { shouldEdit, data } = event;
+
+    if (data) {
       this.savingForm = this._formBuilder.group({
-        id: saving.id,
-        title: [saving.title, Validators.required],
-        priority: saving.priority,
-        currentAmount: [saving.currentAmount, Validators.required],
-        goalAmount: saving.goalAmount ? saving.goalAmount : null,
-        goalDate: saving.goalDate ? new Date(saving.goalDate) : null,
-        lastUpdated: saving.lastUpdated
+        id: data.id,
+        title: [data.title, Validators.required],
+        priority: data.priority,
+        currentAmount: [data.currentAmount, Validators.required],
+        goalAmount: data.goalAmount ? data.goalAmount : null,
+        goalDate: data.goalDate ? new Date(data.goalDate) : null,
+        lastUpdated: data.lastUpdated
       });
     }
 
-    this.editSavingWindowIsOpen = event;
+    this.editSavingWindowIsOpen = shouldEdit;
   }
 
   handleUpdateForm(event: {field: string, value: any}): void {

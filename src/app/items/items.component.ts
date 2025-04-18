@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { ArchiveService } from '../archives/archive.service';
-import { AddCardComponent, BarChartComponent, DeleteModalComponent, DisplayContainerComponent, EditCardComponent } from '../common';
+import { AddCardComponent, BarChartComponent, DeleteModalComponent, DisplayCardComponent, DisplayContainerComponent, EditCardComponent } from '../common';
 import { ArchiveRequest, Item } from '../models';
 import { CreatedDatePipe } from '../pipes/created-date/created-date.pipe';
 import { EditItemsComponent } from './edit-items/edit-items.component';
@@ -13,7 +13,7 @@ import { ItemService } from './item.service';
 @Component({
   selector: 'app-items',
   standalone: true,
-  imports: [DisplayContainerComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, BarChartComponent, EditItemsComponent, MatCardModule, CommonModule, CurrencyPipe, CreatedDatePipe],
+  imports: [DisplayContainerComponent, DisplayCardComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, BarChartComponent, EditItemsComponent, MatCardModule, CommonModule, CurrencyPipe, CreatedDatePipe],
   templateUrl: './items.component.html',
   styleUrl: './items.component.scss'
 })
@@ -72,18 +72,20 @@ export class ItemsComponent implements OnInit {
     this.addItemWindowIsOpen = event;
   }
 
-  handleEditItemWindow(event: boolean, item: Item | null = null): void {
-    if (item) {
+  handleEditItemWindow(event: {shouldEdit: boolean, data: Item | null}): void {
+    const { shouldEdit, data } = event;
+
+    if (data) {
       this.itemForm = this._formBuilder.group({
-        id: item.id,
-        title: item.title,
-        amount: item.amount,
-        url: item.url ? item.url : null,
-        createdDate: item.createdDate
+        id: data.id,
+        title: data.title,
+        amount: data.amount,
+        url: data.url ? data.url : null,
+        createdDate: data.createdDate
       });
     }
 
-    this.editItemWindowIsOpen = event;
+    this.editItemWindowIsOpen = shouldEdit;
   }
 
   handleUpdateForm(event: {field: string, value: any}): void {

@@ -2,14 +2,16 @@ import { CommonModule, CurrencyPipe, DatePipe } from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
-import { DueDatePipe } from "src/app/pipes/due-date/due-date.pipe";
+import { DueDatePipe } from "src/app/pipes";
+import { CreatedDatePipe } from "src/app/pipes/created-date/created-date.pipe";
+import { GoalDatePipe } from "src/app/pipes/goal-date/goal-date.pipe";
 
 @Component({
   selector: 'app-display-card',
   templateUrl: './display-card.component.html',
   styleUrl: './display-card.component.scss',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe]
+  imports: [MatCardModule, MatIconModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe, GoalDatePipe, CreatedDatePipe]
 })
 export class DisplayCardComponent {
   @Input() entity!: any;
