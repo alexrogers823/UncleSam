@@ -10,7 +10,6 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
-      require('karma-junit-reporter'),
       require('karma-spec-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
@@ -35,11 +34,6 @@ module.exports = function (config) {
       ]
     },
     reporters: ['kjhtml', 'spec'],
-    junitReporter: {
-      outputDir: 'test-results',
-      outputFile: 'unit-test-results.xml',
-      useBrowserName: false
-    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_ERROR,
