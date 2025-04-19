@@ -1,6 +1,7 @@
 import { CurrencyPipe } from "@angular/common";
 import { Component, EventEmitter, Input, OnChanges, Output } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
+import { MatIconModule } from "@angular/material/icon";
 import { calculateSummary } from "src/app/utils";
 import { DisplayCardComponent } from "../display-card";
 import { EditCardComponent } from "../edit-card";
@@ -10,7 +11,7 @@ import { EditCardComponent } from "../edit-card";
   templateUrl: './display-container.component.html',
   styleUrl: './display-container.component.scss',
   standalone: true,
-  imports: [MatCardModule, DisplayCardComponent, EditCardComponent, CurrencyPipe]
+  imports: [MatCardModule, MatIconModule, DisplayCardComponent, EditCardComponent, CurrencyPipe]
 })
 export class DisplayContainerComponent implements OnChanges {
   @Input() header!: string;

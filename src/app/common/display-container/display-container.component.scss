@@ -1,0 +1,14 @@
+.display-container {
+  display: flex;
+}
+
+.actions {
+  order: -1;
+  align-self: flex-end;
+}
+
+.display-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
