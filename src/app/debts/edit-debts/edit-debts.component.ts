@@ -7,14 +7,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { AddCardComponent } from 'src/app/common';
 import { Debt } from 'src/app/models';
 
 @Component({
   selector: 'app-edit-debts',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [AddCardComponent, FormsModule, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDatepickerModule, MatExpansionModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDatepickerModule, MatExpansionModule],
   templateUrl: './edit-debts.component.html',
   styleUrl: './edit-debts.component.scss'
 })

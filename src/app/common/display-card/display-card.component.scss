@@ -1,7 +1,14 @@
 .display-card {
-  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 250px;
   border-radius: 5px;
   border-width: 2px;
+}
+
+mat-card-title {
+  font-size: 18px;
 }
 
 .action-buttons {

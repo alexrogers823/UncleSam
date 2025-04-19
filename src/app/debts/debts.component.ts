@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ArchiveService } from '../archives/archive.service';
-import { AddCardComponent, DeleteModalComponent, DisplayCardComponent, DisplayContainerComponent, EditCardComponent, LineChartComponent } from '../common';
+import { DeleteModalComponent, DisplayCardComponent, DisplayContainerComponent, EditCardComponent, LineChartComponent } from '../common';
 import { ArchiveRequest, Debt } from '../models';
 import { DueDatePipe } from '../pipes';
 import { DebtService } from './debt.service';
@@ -15,7 +15,7 @@ import { EditDebtsComponent } from './edit-debts/edit-debts.component';
 @Component({
   selector: 'app-debts',
   standalone: true,
-  imports: [DisplayContainerComponent, AddCardComponent, DisplayCardComponent, EditCardComponent, DeleteModalComponent, EditDebtsComponent, LineChartComponent, MatCardModule, MatIconModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
+  imports: [DisplayContainerComponent, DisplayCardComponent, EditCardComponent, DeleteModalComponent, EditDebtsComponent, LineChartComponent, MatCardModule, MatIconModule, CommonModule, CurrencyPipe, DatePipe, DueDatePipe],
   // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './debts.component.html',
   styleUrl: './debts.component.scss'

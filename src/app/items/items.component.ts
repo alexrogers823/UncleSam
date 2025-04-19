@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { ArchiveService } from '../archives/archive.service';
-import { AddCardComponent, BarChartComponent, DeleteModalComponent, DisplayCardComponent, DisplayContainerComponent, EditCardComponent } from '../common';
+import { BarChartComponent, DeleteModalComponent, DisplayCardComponent, DisplayContainerComponent, EditCardComponent } from '../common';
 import { ArchiveRequest, Item } from '../models';
 import { CreatedDatePipe } from '../pipes/created-date/created-date.pipe';
 import { EditItemsComponent } from './edit-items/edit-items.component';
@@ -13,7 +13,7 @@ import { ItemService } from './item.service';
 @Component({
   selector: 'app-items',
   standalone: true,
-  imports: [DisplayContainerComponent, DisplayCardComponent, AddCardComponent, EditCardComponent, DeleteModalComponent, BarChartComponent, EditItemsComponent, MatCardModule, CommonModule, CurrencyPipe, CreatedDatePipe],
+  imports: [DisplayContainerComponent, DisplayCardComponent, EditCardComponent, DeleteModalComponent, BarChartComponent, EditItemsComponent, MatCardModule, CommonModule, CurrencyPipe, CreatedDatePipe],
   templateUrl: './items.component.html',
   styleUrl: './items.component.scss'
 })
