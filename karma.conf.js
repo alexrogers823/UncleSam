@@ -32,13 +32,25 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['junit'],
+    junitReporter: {
+      outputDir: 'test-results',
+      outputFile: 'unit-test-results.xml',
+      useBrowserName: false
+    },
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false,
-    restartOnFileChange: true
+    logLevel: config.LOG_ERROR,
+    autoWatch: false,
+    singleRun: true,
+    restartOnFileChange: true,
+    browserNoActivityTimeout: 40000,
+    browsers: ['ChromeHeadlessCI'],
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    }
   });
 };
