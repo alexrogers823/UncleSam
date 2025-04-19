@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "test:ci": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -40,6 +41,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "karma-spec-reporter": "^0.0.36",
     "postcss": "^8.4.38",
     "protractor": "^7.0.0",
     "tailwindcss": "^3.4.4",
