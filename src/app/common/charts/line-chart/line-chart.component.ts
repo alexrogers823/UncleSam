@@ -30,8 +30,7 @@ export class LineChartComponent implements OnChanges {
       return instance.history.map((h: any) => h.date);
     });
 
-    this.dateLabels = [...new Set<string>(dates.flat())].sort()
-    console.log(this.dateLabels)
+    this.dateLabels = [...new Set<string>(dates.flat())].sort();
   }
 
   private _arrangeAmountDataPoints(history: any[]): number|null[] {
@@ -49,8 +48,6 @@ export class LineChartComponent implements OnChanges {
         }
       })
     }
-
-    console.log('data points', dataPoints)
 
     return dataPoints;
   }
