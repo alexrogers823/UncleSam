@@ -30,15 +30,18 @@ export class LineChartComponent implements OnChanges {
       return instance.history.map((h: any) => h.date);
     });
 
-    this.dateLabels = [...new Set<string>(dates.flat())];
+    this.dateLabels = [...new Set<string>(dates.flat())].sort();
   }
 
   private _arrangeAmountDataPoints(history: any[]): number|null[] {
     const dataPoints: number|null[] = [];
 
     if (this.dateLabels) {
-      this.dateLabels.forEach((date, index) => {
-        if (index < history.length && date === history[index].date) {
+      const historyDates = history.map((h: any) => h.date);
+
+      this.dateLabels.forEach((date) => {
+        if (historyDates.includes(date)) {
+          const index = historyDates.indexOf(date)
           dataPoints.push(history[index].amount);
         } else {
           dataPoints.push(null);
